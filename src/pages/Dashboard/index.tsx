@@ -35,14 +35,16 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     async function loadProducts(): Promise<void> {
-      // TODO
+      const {data: products} = await api.get('/products');
+
+      setProducts(products);
     }
 
     loadProducts();
   }, []);
 
   function handleAddToCart(item: Product): void {
-    // TODO
+    addToCart(item);
   }
 
   return (
@@ -56,7 +58,9 @@ const Dashboard: React.FC = () => {
             height: 80,
           }}
           renderItem={({ item }) => (
+            
             <Product>
+              {console.log('item:===>', item)}
               <ProductImage source={{ uri: item.image_url }} />
               <ProductTitle>{item.title}</ProductTitle>
               <PriceContainer>
